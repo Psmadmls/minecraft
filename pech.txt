@@ -1,0 +1,58 @@
+* @param CommandSender $sender
+     * @param Command $command
+     * @param string $label
+     * @param array $args
+     * @return boolean
+     */
+    public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool{
+        switch($command->getName()){
+            case "menu":
+                if(!$sender instanceof Player){
+                    $sender->sendMessage("Usa esto en el juego!");
+                    return false;
+                }
+                // function
+                $this->myForm($sender);
+            break;
+        }
+        return true;        
+    }
+
+    /**
+     * ES: Este método crea y envía un formulario simple al jugador. El formulario tiene un título, contenido y botones. 
+     * Cuando el jugador selecciona un botón, se ejecuta una función de devolución de llamada que maneja la lógica 
+     * según el botón presionado.
+     * 
+     * ENG: This method creates and sends a simple form to the player. The form has a title, content, and buttons. 
+     * When the player selects a button, a callback function is executed that handles the logic based on the pressed button.
+     * 
+     * @param Player $player
+     * @return void
+     */
+    public function myForm(Player $player): void {
+
+        $form = new SimpleForm(function(Player $player, $data){
+            if(is_null($data)){
+                // NULL
+                $player->sendMessage(self::getPrefix(). TF::colorize("&cคุณได้ปิดuiแล้ว"));
+                return;
+            }
+            switch($data){
+                case 0: // MSJ 1
+                    $player->sendMessage(self::getPrefix(). TF::colorize("&eกำลังโหลด....."));
+                    $player->getServer()->dispatchCommand($player, "transferme 147.50.252.54 19132");
+            }
+        });
+
+        $form->setTitle(TF::colorize("&lpec:ui"));
+        //$form->setContent(TF::colorize("&eสวัสดีครับ:"));
+        $form->addButton(TF::colorize("&lserver"), 0, "textures/items/diamond");
+        $player->sendForm($form);
+    }
+
+    public function getPlayerCountFromServer(string $host, int $port): int {
+        // ดึงข้อมูลจำนวนผู้เล่นจากเซิร์ฟเวอร์ที่ระบุ
+        // เปลี่ยนเป็นโค้ดที่ใช้ฟังก์ชันที่รองรับการดึงข้อมูลจำนวนผู้เล่นจากเซิร์ฟเวอร์ Minecraft
+        // ตัวอย่างที่กำหนดจำนวนผู้เล่นเป็น 10
+        return 10;
+    }

@@ -1,4 +1,54 @@
-* @param CommandSender $sender
+<?php
+
+#      _       ____   __  __ 
+#     / \     / ___| |  \/  |
+#    / _ \   | |     | |\/| |
+#   / ___ \  | |___  | |  | |
+#  /_/   \_\  \____| |_|  |_|
+# The creator of this plugin was fernanACM.
+# https://github.com/fernanACM
+
+/**
+ * declare(strict_types=1);: Esto declara que el código debe usar el modo estricto de tipos en PHP.
+ * This declares that the code should use strict types mode in PHP.
+ * 
+ * namespace fernanACM\PluginForm;: Define el espacio de nombres en el que se encuentra la clase Main.
+ * Defines the namespace in which the Main class is located.
+ */
+declare(strict_types=1);
+
+namespace fernanACM\PluginForm;
+
+use pocketmine\player\Player;
+use pocketmine\plugin\PluginBase;
+use pocketmine\utils\TextFormat as TF;
+use pocketmine\command\CommandSender;
+use pocketmine\command\Command;
+use Vecnavium\FormsUI\SimpleForm;
+
+/** ES: Define una clase llamada Main que extiende PluginBase, la clase base para todos los plugins de PocketMine. */
+/** ENG: Defines a class called Main that extends PluginBase, the base class for all PocketMine plugins. */
+class Main extends PluginBase{
+
+    /**
+     * ES: Este método se llama cuando el plugin se habilita. Aquí, simplemente imprime un mensaje de registro.
+     * 
+     * ENG: This method is called when the plugin is enabled. Here, it simply logs a message.
+     * 
+     * @return void
+     */
+    public function onEnable(): void{
+        $this->getServer()->getLogger()->info("Esto es una prueba...");
+    }
+
+    /**
+     * ES: Este método maneja los comandos del jugador. Si el comando es "/form", verifica si el remitente es un jugador. 
+     * Si no lo es, envía un mensaje y devuelve falso. Luego, llama al método myForm().
+     * 
+     * ENG: This method handles player commands. If the command is "/form", it checks if the sender is a player. 
+     * If not, it sends a message and returns false. Then, it calls the myForm() method.
+     * 
+     * @param CommandSender $sender
      * @param Command $command
      * @param string $label
      * @param array $args
@@ -56,3 +106,15 @@
         // ตัวอย่างที่กำหนดจำนวนผู้เล่นเป็น 10
         return 10;
     }
+
+    /**
+     * ES: Este método devuelve un prefijo de color utilizado para formatear los mensajes del plugin.
+     * 
+     * ENG: This method returns a color prefix used to format plugin messages.
+     * 
+     * @return string
+     */
+    public static function getPrefix(): string{
+        return TF::colorize("&l&aปิด: ");
+    }
+}
